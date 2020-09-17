@@ -1,13 +1,31 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
+        <li>{{ question.question_text }}</a>
+        {% if question.can_vote %}
+            <form action="{% url 'polls:results' question.id %}">
+                <input type="submit" value="results" />
+                </form>
+            <form action="{% url 'polls:detail' question.id %}">
+                <input type="submit" value="vote" />
+                </form>
+        {% else %}
+            <a href = "{% url 'polls:results' question.id %}">{{"results"}}</a>
+        </li>
+
+    {% if messages %}
+<ul class="messages">
+  {% for msg in messages %}
+    <b class="{{msg.tags}}">{{ msg }}</b>
+  {% endfor %}
+  {% endif %}
+</ul>
+{% endif %}
+{% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
 
 {% load static %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">

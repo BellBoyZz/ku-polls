@@ -10,11 +10,3 @@
 {% endfor %}
 <input type="submit" value="Vote">
 </form>
-
-{% if messages %}
-<ul class="messages">
-  {% for msg in messages %}
-    <li class="{{msg.tags}}">{{ msg }}</li>
-  {% endfor %}
-</ul>
-{% endif %}

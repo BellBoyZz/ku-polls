@@ -119,8 +119,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
-
-# Show debug messages and higher
-
-MESSAGE_LEVEL = 10
