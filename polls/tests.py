@@ -13,9 +13,9 @@ def create_question(question_text, pub, end):
     given number of `pub` and `end` offset to now (negative for questions published
     in the past, positive for questions that have yet to be published).
     """
-    pub_time = timezone.now() + datetime.timedelta(days=pub)
-    end_time = timezone.now() + datetime.timedelta(days=end)
-    return Question.objects.create(question_text=question_text, pub_date=pub_time, end_date=end_time)
+    pub_date = timezone.now() + datetime.timedelta(days=pub)
+    end_date = timezone.now() + datetime.timedelta(days=end)
+    return Question.objects.create(question_text=question_text, pub_date=pub_date, end_date=end_date)
 
 
 class QuestionIndexViewTests(TestCase):

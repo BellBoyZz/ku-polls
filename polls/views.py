@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
+from django.contrib import messages
 
 
 class IndexView(generic.ListView):
@@ -64,3 +65,12 @@ def vote(request, question_id):
         selected_choice.votes += 1
         selected_choice.save()
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
+def vote_for_poll(request, question_id):
+    choice_id = request.POST['choice']
+    if not choice_id:
+        messages.error(request, f"You didn't make a choice")
+        return redirect('polls:someplace')
+    messages.success(request, "Your choice successfully recorded. Thank you.")
+    return redirect('polls:results')
+    
