@@ -17,7 +17,7 @@ class IndexView(generic.ListView):
         """
         return Question.objects.filter(
             pub_date__lte=timezone.now()
-        ).order_by('-pub_date')[:5]
+        ).order_by('-pub_date')[:]
 
 
 class DetailView(generic.DetailView):
@@ -37,7 +37,7 @@ class ResultsView(generic.DetailView):
 
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    latest_question_list = Question.objects.order_by('-pub_date')[:]
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 
