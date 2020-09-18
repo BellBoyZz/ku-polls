@@ -10,3 +10,6 @@
 {% endfor %}
 <input type="submit" value="Vote">
 </form>
+<form action="{% url 'polls:index'  %}">
+        <input type="submit" value="Back to List of Polls" />
+</form>
