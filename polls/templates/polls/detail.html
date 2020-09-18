@@ -13,3 +13,6 @@
 <form action="{% url 'polls:index'  %}">
         <input type="submit" value="Back to List of Polls" />
 </form>
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">

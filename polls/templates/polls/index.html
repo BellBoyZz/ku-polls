@@ -1,7 +1,7 @@
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}
-        <li>{{ question.question_text }}</a>
+        <li>{{ question.question_text }}</li>
         {% if question.can_vote %}
             <form action="{% url 'polls:results' question.id %}">
                 <input type="submit" value="results" />
@@ -10,7 +10,9 @@
                 <input type="submit" value="vote" />
                 </form>
         {% else %}
-            <a href = "{% url 'polls:results' question.id %}">{{"results"}}</a>
+            <form action="{% url 'polls:results' question.id %}">
+                <input type="submit" value="results" />
+                </form>
         </li>
 
     {% if messages %}

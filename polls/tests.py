@@ -117,8 +117,8 @@ class QuestionModelTests(TestCase):
         can_vote() returns False for questions that are closed.
         """
         time = timezone.now() - datetime.timedelta(days=4)
-        end_time = timezone.now() - datetime.timedelta(days=2)
-        past_question = Question(pub_date=time, end_date=end_time)
+        end_date = timezone.now() - datetime.timedelta(days=2)
+        past_question = Question(pub_date=time, end_date=end_date)
         self.assertIs(past_question.can_vote(), False)
 
     def test_can_vote_with_future_question(self):
@@ -126,8 +126,8 @@ class QuestionModelTests(TestCase):
         can_vote() returns False for questions that are not open yet.
         """
         time = timezone.now() + datetime.timedelta(days=1)
-        end_time = timezone.now() + datetime.timedelta(days=3)
-        future_question = Question(pub_date=time, end_date=end_time)
+        end_date = timezone.now() + datetime.timedelta(days=3)
+        future_question = Question(pub_date=time, end_date=end_date)
         self.assertIs(future_question.can_vote(), False)
 
 class QuestionDetailViewTests(TestCase):

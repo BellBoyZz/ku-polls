@@ -1,5 +1,6 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
 <h1>{{ question.question_text }}</h1>
-
 {% if messages %}
 <ul class="messages">
   {% for msg in messages %}
@@ -7,10 +8,16 @@
   {% endfor %}
 </ul>
 {% endif %}
-
+<ul>
+    <table width="20%">
 {% for choice in question.choice_set.all %}
-    <ul>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</ul>
+        <tr>
+            <td>{{ choice.choice_text }}</td>
+            <td>{{ choice.votes }}</td>
+          </tr>
 {% endfor %}
+    </table>
+</ul>
 
 <form action="{% url 'polls:index'  %}">
         <input type="submit" value="Back to List of Polls" />
