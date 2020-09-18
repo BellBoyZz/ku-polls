@@ -11,20 +11,24 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+import environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+environ.Env.read_env()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+DEBUG = env('DEBUG')
+
+SECRET_KEY = env('SECRET_KEY')
+
+
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '+-07xg0um&0)x^s7_*a5mxjy0p-!)92#+w4e4nub1_g@$s)clg'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 
