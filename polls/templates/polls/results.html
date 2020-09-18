@@ -8,15 +8,9 @@
 </ul>
 {% endif %}
 
-<ul>
 {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    <ul>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</ul>
 {% endfor %}
-</ul>
-
-<form action="{% url 'polls:detail' question.id %}">
-        <input type="submit" value="Vote again" />
-</form>
 
 <form action="{% url 'polls:index'  %}">
         <input type="submit" value="Back to List of Polls" />
