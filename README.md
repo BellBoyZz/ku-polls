@@ -9,3 +9,5 @@ is an application for conducting online polls and surways.
 [Requirements](https://github.com/BellBoyZz/ku-polls/wiki/Requirements)
 
 [Iteration 1 Plan](https://github.com/BellBoyZz/ku-polls/wiki/Iteration-1-Plan)
+
+[Iteration 2 Plan](https://github.com/BellBoyZz/ku-polls/wiki/Iteration-2-Plan)
