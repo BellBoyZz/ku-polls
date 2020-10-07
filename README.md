@@ -1,4 +1,6 @@
 # Kasetsart Polls
+[![Build Status](https://travis-ci.com/BellBoyZz/ku-polls.svg?branch=master)](https://travis-ci.com/BellBoyZz/ku-polls)
+[![codecov](https://codecov.io/gh/BellBoyZz/ku-polls/branch/master/graph/badge.svg)](https://codecov.io/gh/BellBoyZz/ku-polls)
 
 is an application for conducting online polls and surways.
 
