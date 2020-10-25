@@ -20,4 +20,6 @@ urlpatterns = [
     path('', include('polls.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
+    path('accounts/login/', include('django.contrib.auth.urls'), name="login"),
+    path('accounts/logout/', include('django.contrib.auth.urls'), name="logout"),
 ]
