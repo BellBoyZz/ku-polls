@@ -1,7 +1,10 @@
 """Views for KU-Polls."""
 
+from django.contrib.auth.decorators import login_required
+import logging.config
+from .settings import LOGGING
 from django.http import HttpResponseRedirect
-from .models import Question, Choice
+from .models import Question, Choice, Vote
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views import generic
@@ -59,6 +62,12 @@ def results(request, question_id):
     return render(request, 'polls/results.html', {'question': question})
 
 
+# For logging options
+logging.config.dictConfig(LOGGING)
+logger = logging.getLogger('polls')
+
+
+@login_required
 def vote(request, question_id):
     """Vote view."""
     question = get_object_or_404(Question, pk=question_id)
@@ -72,9 +81,11 @@ def vote(request, question_id):
     else:
         if not (question.can_vote()):
             messages.warning(request, "This polls are not allowed. ")
-            return HttpResponseRedirect(reverse('polls:index'))
+        elif Vote.objects.filter(user=request.user, question=question).exists():
+            this_votes = Vote.objects.get(user=request.user, question=question)
+            this_votes.choice = selected_choice
+            this_votes.save()
         else:
-            selected_choice.votes += 1
-            selected_choice.save()
+            question.vote_set.create(choice=selected_choice, user=request.user)
             messages.success(request, "Vote successful, thank you for voting. ")
-            return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

@@ -53,6 +53,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # username/password authentication
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
@@ -123,4 +128,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/polls/'
-LOGOUT_REDIRECT_URL = 'some-existing-view'
+LOGOUT_REDIRECT_URL = '/polls/'
