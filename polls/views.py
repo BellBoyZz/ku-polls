@@ -37,11 +37,7 @@ class ResultsView(generic.DetailView):
 def detail(request, question_id):
     """Details to view."""
     question = get_object_or_404(Question, pk=question_id)
-    try:
-        previous_choice = question.vote_set.get(user=request.user).choice
-    except (KeyError, Vote.DoesNotExist):
-        return render(request, 'polls/detail.html', {'question': question})
-    return render(request, 'polls/detail.html', {'question': question, 'previous_choice': previous_choice})
+    return render(request, 'polls/detail.html', {'question': question})
 
 
 # For logging options
@@ -72,7 +68,9 @@ def vote(request, question_id):
         logger.info(
             f'User {request.user.username} voted for question id number {question.id} from {get_client_ip(request)}')
         messages.success(request, "Vote successful, thank you for voting. ")
+        request.session['choice'] = selected_choice.id
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
 
 def get_client_ip(request):
     """Return client ip address."""
@@ -83,15 +81,18 @@ def get_client_ip(request):
         ip = request.META.get('REMOTE_ADDR')
     return ip
 
+
 @receiver(user_logged_in)
 def user_logged_in_callback(sender, request, user, **kwargs):
     """Log the detail of user and ip address when user logged in."""
     logger.info(f'User {user.username} logged in from {get_client_ip(request)}')
 
+
 @receiver(user_logged_out)
 def user_logged_out_callback(sender, request, user, **kwargs):
     """Log the detail of user and ip address when user logged out."""
     logger.info(f'User {user.username} logged out from {get_client_ip(request)}')
+
 
 @receiver(user_login_failed)
 def user_login_failed_callback(sender, credentials, request, **kwargs):

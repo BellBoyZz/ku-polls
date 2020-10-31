@@ -8,7 +8,7 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
     <label for="choice{{ forloop.counter }}"> {{ choice.choice_text }}
     </label>
-    {% if previous_choice.id == choice.id %}---> your previous selection
+    {% if request.session.choice == choice.id %}---> your previous selection
     {% endif %}
     <br>
 {% endfor %}
